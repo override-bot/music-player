@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Player
+    </title>
+    <style>
+        body {
+            background-color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .main-div {
+                background-color: black;
+            }
+        }
+        
+        .main-div {
+            background-color: rgb(255, 255, 255);
+            width: 95%;
+            height: 94vh;
+            margin: 0 auto;
+            border: 1px solid black;
+            border-radius: 20px;
+            box-shadow: 1px 1px 2px rgba(59, 59, 59, 0.795), 0 0 1em rgba(59, 58, 58, 0.795), 0 0 0.2em rgba(56, 56, 56, 0.801);
+        }
+        
+        .MinfoBck {
+            width: 100%;
+            height: 50vh;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .Minfo {
+            height: 40vh;
+            width: 40vh;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 2px solid rgb(216, 214, 214);
+            background-image: url(clubbing.jpg);
+            background-size: 100% 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -moz-animation: spinoffPulse 2s infinite linear;
+            animation: spinoffPulse 2s infinite linear;
+            -webkit-animation: spinoffPulse 3s infinite linear;
+            box-shadow: 2px 2px 3px rgba(0, 60, 255, 0.616), 0 0 2em rgba(0, 60, 255, 0.616), 0 0 0.3em rgba(0, 60, 255, 0.616);
+        }
+        
+        .black-circle {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: black;
+        }
+        
+        .ranger {
+            width: 85%;
+            height: 25px;
+            background-color: transparent;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+        
+        .range {
+            height: 10px;
+            width: 99%;
+            background-color: rgb(63, 63, 155);
+            outline: none;
+        }
+        
+        .buttons {
+            width: 45%;
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        .Play-pause-next {
+            flex: 2 2 auto;
+            margin: 20px;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+        }
+        
+        .play {
+            box-shadow: 2px 2px 3px rgba(0, 60, 255, 0.616), 0 0 2em rgba(0, 60, 255, 0.616), 0 0 0.3em rgba(0, 60, 255, 0.616);
+        }
+        
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .song-info {
+            text-align: center;
+            color: rgb(53, 41, 228);
+        }
+        
+        h2 {
+            color: rgb(185, 183, 183) !important;
+        }
+        
+        .currentTime {
+            color: red;
+            float: left;
+        }
+        
+        .durationTime {
+            color: rgb(53, 41, 228);
+            float: right;
+        }
+        
+        H3 {
+            color: black;
+        }
+        
+        .submit {
+            border-radius: 20px;
+            background-color: rgb(53, 41, 228);
+            COLOR: white !important;
+        }
+        
+        .percent {
+            color: rgb(53, 41, 228);
+            font-weight: bolder;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="modal.css">
+</head>
+
+<body onload="RetrieveSongs()"><br/>
+    <div class="main-div">
+        <br/><br/><br/><br/><br/>
+        <div class="percent"></div>
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto; float:right;">Add Music</button>
+
+        <div id="id01" class="modal">
+
+            <form class="modal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close form">&times;</span>
+                    <br/>
+                </div>
+
+                <div class="container">
+                    <input type="text" placeholder="NAME OF ARTIST" id="newArtist" /><br/>
+                    <input type="text" placeholder="NAME OF SONG" id="newSongName" /><br/>
+                    <input type="text" placeholder="LINK TO SONG" id="newSong" /><br/>
+                    <br/>
+
+                    <input type="button" class="submit" value="ADD" onclick="addSong()" />
+                    <label>
+       
+      </label>
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+
+                </div>
+            </form>
+        </div>
+        <br/><br/><br/>
+        <div class="song-info">
+            <h3 style="color:red;">NOW PLAYING</h3>
+            <h1 class="song-title">LOOK BACK AT IT</h1>
+            <h2 class="song-artist">A BOOGIE WITH DA HOODIE</h2>
+
+
+        </div>
+
+        <audio src="A Boogie Wit Da Hoodie - Look Back At It.mp3" id="song"></audio>
+
+        <br/><br/><br/><br/>
+        <div class="Minfo">
+
+
+        </div><br/>
+        <br/><br/>
+        <br/>
+        <div>
+
+            <br/><br/><br/>
+            <div class="ranger">
+                <input type="range" class="range" id="progress-bar" min="0" max="" value="0" onchange="changeProgressBar()" />
+            </div><br/>
+            <div class="currentTime"></div>
+            <div class="durationTime"></div>
+
+            <br/><br/><br/><br/>
+            <div class="buttons">
+
+                <img src="sound-01-512.png" class="Play-pause-next" onclick="previousSong()" id="previous-song" />
+                <img src="115-1156160_circled-play-icon-blue-circle-hd-png-download.png" class="Play-pause-next play" onclick="playPause()" id="play-pause" />
+                <img src="sound-01-512.png" class="Play-pause-next" onclick="nextSong()" id="next-song" style="transform: scaleX(-1); -webkit-transform:scaleX(-1);" />
+
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
